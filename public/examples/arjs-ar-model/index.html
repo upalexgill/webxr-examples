@@ -1,0 +1,38 @@
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>ar.js AR (Marker/Aframe) Model</title>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+	<!-- we import arjs version without NFT but with marker + location based support -->
+	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <style>
+    .info {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    color: #000;
+    font-family: sans-serif;
+    font-weight: bold;
+    left: 0;
+    margin: 1em;
+    padding: 0.5em 1em;
+    position: absolute;
+    text-decoration: none;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 1;
+  }
+  </style>
+</head>
+<body style="margin: 0px; overflow: hidden;">
+<a class="info" href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank">Marker</a>
+  <a-scene ar>
+      <a-marker preset="hiro">
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="//dl.dropboxusercontent.com/s/qap2d6wiqls2f2m/stall_v001.glb"
+        ></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+  </a-scene>

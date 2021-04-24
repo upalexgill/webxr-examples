@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>aframe.js VR Cube</title>
+		<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+		<script src="https://cdn.rawgit.com/tizzle/aframe-orbit-controls-component/55cbc1d2/dist/aframe-orbit-controls-component.js"></script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<a-scene>
+			<a-entity
+				id="camera"
+				camera
+				position="0 0 1"
+				orbit-controls="
+					target: #target;
+				"></a-entity>
+			<a-entity id="target">
+			<a-box src="https://assets.codepen.io/238794/Pfizer_new_2021.jpeg" position="0 0 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#fff">
+				<a-animation attribute="rotation" easing="linear" dur="10000" to="360 360 360" repeat="indefinite">
+					</a-animation>
+			</a-box>
+				</a-entity>
+			<a-sky color="#000"></a-sky>
+		</a-scene>
+	</body>
+</html>

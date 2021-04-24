@@ -1,0 +1,73 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>aframe.js VR Model</title>
+		<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe/dist/aframe-master.min.js"></script>
+		<script>
+			AFRAME.registerComponent('model-loader', {
+        init: function() {
+          let loader = document.querySelector('#loading')
+          this.el.addEventListener('model-loaded', e => {
+            console.log('Model loaded')
+            loader.setAttribute('visible', 'false')
+          })
+        }
+      })
+
+			const player = document.querySelector('a-camera');
+			const direction = new THREE.Vector3();
+			window.addEventListener('keydown', (e) => {
+				if (e.code === 'KeyR') {
+					this.el.sceneEl.camera.getWorldDirection(direction);
+					direction.multiplyScalar(0.1);
+					const pos = player.getAttribute('position');
+					pos.x += direction.x;
+					pos.y += direction.y;
+					pos.z += direction.z;
+					player.setAttribute('position', pos);
+				}
+			})
+		</script>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<a-scene>
+			<a-entity id="loading" text="value: Loading...;" scale="15 15 15" position="6 5 0"></a-entity>
+			<a-entity id="cameraWrapper" position="0 4 6">
+				<a-entity id="camera" camera look-controls wasd-controls>
+					<a-entity id="cursor" position="0 0 -2"
+						geometry="primitive: ring; radiusOuter: 0.016; radiusInner: 0.01"
+						material="color: #ff0000; shader: flat; transparent: true; opacity: 0.5"
+						scale="2 2 2" raycaster>
+					</a-entity>
+				</a-entity>
+			</a-entity>
+			<a-entity light="type: ambient; color: #fff; intensity: 0.5;"></a-entity>
+			<a-light type="directional"
+				light="color: #fff;
+				intensity: 1;
+				castShadow: true;
+				shadowMapHeight: 1024;
+				shadowMapWidth: 1024;
+				shadowCameraLeft: -7;
+				shadowCameraRight: 5;
+				shadowCameraBottom: -5;
+				shadowCameraTop: 5;"
+				id="light"
+				target="model"
+				position="-5 3 1.5"></a-light>
+	    <a-entity shadow="cast: true; receive: true" id="model" position="-8 0 0" gltf-model="//dl.dropboxusercontent.com/s/qap2d6wiqls2f2m/stall_v001.glb" model-loader></a-entity>
+			<a-sky color="#000"></a-sky>
+		</a-scene>
+	</body>
+</html>

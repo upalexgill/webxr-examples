@@ -1,0 +1,135 @@
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<title>ar.js AR (Marker/Aframe) Cube</title>
+	<script src="https://assets.codepen.io/238794/three.js"></script>
+	<script src="https://assets.codepen.io/238794/artoolkit.min.js"></script>
+	<script src="https://assets.codepen.io/238794/artoolkit.api.js"></script>
+	<script src="https://assets.codepen.io/238794/threex-artoolkitsource.js"></script>
+	<script src="https://assets.codepen.io/238794/threex-artoolkitcontext.js"></script>
+	<script src="https://assets.codepen.io/238794/threex-arbasecontrols.js"></script>
+	<script src="https://assets.codepen.io/238794/threex-armarkercontrols.js"></script>
+	<style>
+    .info {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    color: #000;
+    font-family: sans-serif;
+    font-weight: bold;
+    left: 0;
+    margin: 1em;
+    padding: 0.5em 1em;
+    position: absolute;
+    text-decoration: none;
+    text-transform: uppercase;
+    top: 0;
+    z-index: 1;
+  }
+  </style>
+</head>
+<body style="margin: 0px; overflow: hidden;">
+	<a class="info" href="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/images/hiro.png" target="_blank">Marker</a>
+<script>
+	var scene, camera, renderer, clock, deltaTime, totalTime;
+	var arToolkitSource, arToolkitContext;
+	var markerRoot1, markerRoot2;
+	var mesh1;
+
+	init();
+	animate();
+
+	function init() {
+		scene = new THREE.Scene();
+
+		let ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
+		scene.add( ambientLight );
+
+		camera = new THREE.Camera();
+		scene.add(camera);
+
+		renderer = new THREE.WebGLRenderer({
+			antialias : true,
+			alpha: true
+		});
+		renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+		renderer.setSize( 640, 480 );
+		renderer.domElement.style.position = 'absolute'
+		renderer.domElement.style.top = '0px'
+		renderer.domElement.style.left = '0px'
+		document.body.appendChild( renderer.domElement );
+
+		clock = new THREE.Clock();
+		deltaTime = 0;
+		totalTime = 0;
+
+		arToolkitSource = new THREEx.ArToolkitSource({
+			sourceType : 'webcam',
+		});
+
+		function onResize() {
+			arToolkitSource.onResize();
+			arToolkitSource.copySizeTo(renderer.domElement);
+			if (arToolkitContext.arController !== null) {
+				arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
+			}
+		}
+
+		arToolkitSource.init(function onReady() {
+			onResize();
+		});
+
+		window.addEventListener('resize', function() {
+			onResize();
+		});
+
+		arToolkitContext = new THREEx.ArToolkitContext({
+			cameraParametersUrl: 'https://assets.codepen.io/238794/camera_para.dat',
+			detectionMode: 'mono'
+		});
+
+		arToolkitContext.init(function onCompleted() {
+			camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+		});
+
+		markerRoot1 = new THREE.Group();
+		scene.add(markerRoot1);
+		let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+			type: 'pattern', patternUrl: 'https://assets.codepen.io/238794/hiro.patt',
+		})
+
+		THREE.ImageUtils.crossOrigin = '';
+		const texture = THREE.ImageUtils.loadTexture('https://assets.codepen.io/238794/Pfizer_new_2021.jpeg');
+		texture.anisotropy = renderer.getMaxAnisotropy();
+
+		const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
+		let materials = [];
+		for(let counter = 0; counter < 6; counter++) {
+			materials.push(new THREE.MeshBasicMaterial({color: 'white',  map: texture}));
+		}
+
+		var cube = new THREE.Mesh(cubeGeometry, materials);
+		markerRoot1.add(cube);
+	}
+
+
+	function update() {
+		if (arToolkitSource.ready !== false) {
+			arToolkitContext.update(arToolkitSource.domElement);
+		}
+	}
+
+
+	function render() {
+		renderer.render( scene, camera );
+	}
+
+
+	function animate() {
+		requestAnimationFrame(animate);
+		deltaTime = clock.getDelta();
+		totalTime += deltaTime;
+		update();
+		render();
+	}
+</script>

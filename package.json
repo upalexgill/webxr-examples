@@ -1,0 +1,19 @@
+{
+  "name": "webxr-examples",
+  "version": "1.0.0",
+  "description": "These are examples of WebXR.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:alexpetergill/webxr-examples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1"
+  },
+  "dependencies": {}
+}
