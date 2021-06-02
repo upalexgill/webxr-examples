@@ -2,7 +2,7 @@ var cacheName = "pwa";
 var prefetchUrls = [
   '/examples/aframe-vr-model/index.html',
   '/examples/aframe-vr-model/aframe-master.min.js',
-  '/examples/aframe-vr-model/assets/stall_v001.glb'
+  'https://dl.dropboxusercontent.com/s/qap2d6wiqls2f2m/stall_v001.glb'
 ];
 
 self.addEventListener("install", function (e) {
