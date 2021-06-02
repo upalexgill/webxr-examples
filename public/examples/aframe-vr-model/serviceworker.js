@@ -1,9 +1,12 @@
 var staticCacheName = "pwa";
+var cachedUrls = [
+  '/examples/aframe-vr-model/'
+];
 
 self.addEventListener("install", function (e) {
   e.waitUntil(
     caches.open(staticCacheName).then(function (cache) {
-      return cache.addAll(["/"]);
+      return cache.addAll(cachedUrls);
     })
   );
 });
