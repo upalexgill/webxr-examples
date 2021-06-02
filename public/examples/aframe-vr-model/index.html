@@ -2,6 +2,9 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>aframe.js VR Model</title>
+			<meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+			<meta name="theme-color" content="black">
+			<link rel="manifest" href="manifest.json">
 		<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe/dist/aframe-master.min.js"></script>
 		<script>
 			AFRAME.registerComponent('model-loader', {
@@ -27,6 +30,24 @@
 					player.setAttribute('position', pos);
 				}
 			})
+		</script>
+		<script>
+			window.addEventListener('load', () => {
+				registerSW();
+			});
+
+			async function registerSW() {
+				if ('serviceWorker' in navigator) {
+					try {
+						await navigator
+							.serviceWorker
+							.register('serviceworker.js');
+					}
+					catch (e) {
+						console.log('SW registration failed');
+					}
+				}
+			}
 		</script>
 		<style>
 			* {
