@@ -1,6 +1,6 @@
 var cacheName = "pwa";
 var prefetchUrls = [
-  '/examples/aframe-vr-model/',
+  '/examples/aframe-vr-model/index.html',
   '/examples/aframe-vr-model/aframe-master.min.js',
   '/examples/aframe-vr-model/assets/stall_v001.glb'
 ];
