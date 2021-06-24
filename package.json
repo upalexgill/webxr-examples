@@ -4,7 +4,8 @@
   "description": "These are examples of WebXR.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": " npm run open && node index.js",
+    "open": "start https://localhost:8443"
   },
   "repository": {
     "type": "git",
