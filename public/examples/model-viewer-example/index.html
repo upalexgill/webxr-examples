@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Model-viewer example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script nomodule src="https://unpkg.com/@google/model-viewer@v0.7.1/dist/model-viewer-legacy.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .demo {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      border: 0px solid #555;
+      box-sizing: border-box;
+    }
+
+    .demo model-viewer {
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+    }
+
+    #error {
+      background-color: #ffffffdd;
+      border-radius: 16px;
+      padding: 16px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      transition: opacity 0.3s;
+    }
+
+    #error.hide {
+      opacity: 0;
+      visibility: hidden;
+      transition: visibility 2s, opacity 1s 1s;
+    }
+  </style>
+</head>
+<body>
+  <div id="demo-container" class="demo">
+    <model-viewer id="model-viewer" src="https://dl.dropboxusercontent.com/s/qap2d6wiqls2f2m/stall_v001.glb"
+    camera-controls shadow-intensity="1" ar ar-modes="scene-viewer webxr quick-look">
+
+      <button slot="ar-button" id="ar-button">
+        View in your space
+      </button>
+
+      <div id="ar-prompt">
+        <img src="https://modelviewer.dev/assets/hand.png">
+      </div>
+
+      <button id="ar-failure">
+        AR is not tracking!
+      </button>
+    </model-viewer>
+  </div>
+  <script>
+      document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+          if (event.detail.status === 'failed') {
+            const error = document.querySelector("#error");
+            error.classList.remove('hide');
+            error.addEventListener('transitionend', (event) => {
+              error.classList.add('hide');
+            });
+          }
+        });
+  </script>
+</body>
+</html>
