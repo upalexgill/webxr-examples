@@ -131,18 +131,18 @@
 </head>
 <body>
   <div id="demo-container" class="demo">
-<model-viewer id="model-viewer" src="https://dl.dropboxusercontent.com/s/qap2d6wiqls2f2m/stall_v001.glb" camera-controls autoplay animation-name="PhysCamera003|Take 001|BaseLayer" ar
-  ar-modes="scene-viewer webxr quick-look" ios-src="https://dl.dropbox.com/s/0uvlf4iw13os9po/stall_v001.usdz">
-  <button slot="ar-button" id="ar-button">
-    View in your space
-  </button>
-  <div id="ar-prompt">
-    <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
-  </div>
-        <button id="ar-failure">
-          AR is not tracking!
-        </button>
-</model-viewer>
+    <model-viewer src="https://dl.dropbox.com/s/d8l8yj3es9q3hgg/Covid-19.glb" camera-controls ar ar-modes="scene-viewer webxr quick-look"
+      ios-src="https://dl.dropbox.com/s/d4dneta9o2c0021/Covid-19.usdz">
+      <button slot="ar-button" id="ar-button">
+        View in your space
+      </button>
+      <div id="ar-prompt">
+        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+      </div>
+      <button id="ar-failure">
+        AR is not tracking!
+      </button>
+    </model-viewer>
   </div>
   <script>
       document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
