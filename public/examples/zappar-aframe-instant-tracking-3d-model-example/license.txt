@@ -1,0 +1,11 @@
+Model Information:
+* title:	Corona_Virus
+* source:	https://sketchfab.com/3d-models/corona-virus-671ebdf845da400ab48b0a94a612d031
+* author:	adrianoxreis (https://sketchfab.com/adrianoxreis)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Corona_Virus" (https://sketchfab.com/3d-models/corona-virus-671ebdf845da400ab48b0a94a612d031) by adrianoxreis (https://sketchfab.com/adrianoxreis) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

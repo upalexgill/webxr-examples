@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<script src="https://libs.zappar.com/zappar-aframe/0.3.9/zappar-aframe.js"></script>
+	<title>Zappar A-Frame: Instant Tracking 3D Model Example</title>
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		#zappar-placement-ui {
+			position: absolute;
+			bottom: 30px;
+			width: 200px;
+			left: calc(50% - 100px);
+
+			background-color: rgba(0, 0, 0, 0.8);
+			color: white;
+			text-align: center;
+			font-family: sans-serif;
+			padding: 10px;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<a-scene>
+		<a-entity zappar-permissions-ui id="permissions"></a-entity>
+		<a-entity zappar-compatibility-ui id="compatibility"></a-entity>
+		<a-entity camera zappar-camera></a-entity>
+		<a-entity zappar-instant="placement-mode: true" id="instant-tracker">
+			<a-entity gltf-model="url(./scene.gltf)"></a-entity>
+		</a-entity>
+	</a-scene>
+	<div id="zappar-placement-ui">Tap here to place the object</div>
+	<script>
+		const placementUI = document.getElementById("zappar-placement-ui");
+		placementUI.addEventListener("click", function () {
+			const instantTracker = document.getElementById("instant-tracker");
+			instantTracker.setAttribute("zappar-instant", "placement-mode: false");
+			placementUI.remove();
+		});
+	</script>
+</body>
+</html>
